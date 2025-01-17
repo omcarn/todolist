@@ -1,0 +1,43 @@
+
+.example-full-width{
+    width: 100%;
+}
+
+.deletebtn , .editbtns{
+    transform: scale(.65);
+    float: right;
+}
+
+::ng-deep .mdc-list-item__primary-text{
+    margin-right: 0;
+    width: 100%;
+}
+
+::ng-deep .mat-icon{
+    margin-right: 0 !important;
+}
+
+@media screen and (min-width: 769px){
+.optionDiv{
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+}
+
+@media screen and (max-width: 769px){
+    .optionDiv{
+        display: inline-flex;
+        align-items: center;
+        width: 95%;
+    }
+}
+
+.hideBtn{
+    display: none;
+}
+
+ .showBtn{
+    display: inline-block;
+
+}
