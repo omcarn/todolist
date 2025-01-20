@@ -80,7 +80,7 @@ export class ListBoxComponent implements OnInit, AfterViewInit {
 
     if (item['isEditable']) {
       item['isEditable'] = false;
-      const promise1 = setDoc(docRef, { ...item, text: item['text'], isEditable: item['isEditable'] });
+      setDoc(docRef, { ...item, text: item['text'], isEditable: item['isEditable'] });
       this.items$ = collectionData(this.itemCollection, { idField: 'id' });
       event.stopPropagation()
     }

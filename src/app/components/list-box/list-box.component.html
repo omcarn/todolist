@@ -18,13 +18,13 @@
             [checked]="item['isChecked']" (click)="onexactcheckclick($event,item)">
 
           <input id="inputBox{{item['id']}}" matInput [class.inputBox]="item['isEditable']"
-            [readonly]="!item['isEditable']" type="text"
+            [readonly]="!item['isEditable']" type="text" (blur)="updateTodo($event,item)"
             style=" margin-left:2%; width: 80%; overflow: hidden; text-overflow: ellipsis; cursor:pointer ; "
             [title]="item['text']" [ngStyle]="{textDecoration : item['isChecked'] ? 'line-through' : null}"
             (click)="onexactcheckclick($event,item)" [(ngModel)]="item['text']" />
 
           <button mat-fab class="editbtns" [ngStyle]="{'visibility': item['isChecked'] ? 'hidden' : 'visible', 
-                  '--mdc-fab-container-color' : item['isEditable'] ? 'seagreen' : 'indianred' }"
+            '--mdc-fab-container-color' : item['isEditable'] ? 'seagreen' : 'indianred' }"
             [disabled]="item['isChecked']" [disabledInteractive]="item['isChecked']"
             (click)=" item['isEditable'] ? updateTodo($event,item) :  (!item['isEditable'] && !item['isChecked']) ? oneditclick($event,item) : null">
             <mat-icon *ngIf="!item['isEditable'] && !item['isChecked']"
