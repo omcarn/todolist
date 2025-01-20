@@ -1,40 +1,47 @@
 <div>
 
-    <label style="text-align: center; font-family: cursive;  font-size: xx-large; left: 30%;  display: block; margin-bottom: 10%;"> An Interactive Todo List</label>
+  <label
+    style="text-align: center; font-family: cursive;  font-size: xx-large; left: 30%;  display: block; margin-bottom: 10%;">
+    An Interactive Todo List</label>
 
-    <mat-form-field class="example-full-width">
-        <!-- <mat-label>Add note</mat-label> -->
-        <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
-        <input type="text"
-               placeholder="Type and enter to add new note "
-               matInput
-               [formControl]="myControl"
-               [matAutocomplete]="auto" 
-               (keypress)="newData($event)"
-        >
-        <mat-autocomplete #matpanel #auto="matAutocomplete" >
-          @for (item of filteredOptions$ | async; track item) {
-            <mat-option [value]="item" style="position: relative; padding: 0;" (click)="stopEvent($event,item)"  >
-              <div class="optionDiv" (click)="onexactcheckclick($event,item)"  style="position: absolute;top:0; left: 0; height: 100%; padding-inline: 15px;" >
-                <input class="example-ripple-checkbox" type="checkbox" style="transform: scale(1.5);" [checked]="item['isChecked']" (click)="onexactcheckclick($event,item)" >
+  <mat-form-field class="example-full-width" title="Type and enter to add new note">
+    <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+    <input type="text" placeholder="Type and enter to add new note" matInput [formControl]="myControl"
+      [matAutocomplete]="auto" (keypress)="newData($event)" #trigger="matAutocompleteTrigger">
 
-                <input matInput [readonly]="!item['isEditable']" type="text" style=" margin-left:2%; width: 80%; overflow: hidden; text-overflow: ellipsis; cursor:pointer ; " 
-                [title]="item['text']" [ngStyle]="{textDecoration : item['isChecked'] ? 'line-through' : null}" 
-                (click)="onexactcheckclick($event,item)" [(ngModel)]="item['text']"/> 
-              
-                <button mat-fab class="editbtns" [disabled]="item['isChecked']" [disabledInteractive]="item['isChecked']"
-                 (click)=" item['isEditable'] ? updateTodo($event,item) :  (!item['isEditable'] && !item['isChecked']) ? oneditclick($event,item) : null" >
-                  <mat-icon *ngIf="!item['isEditable'] && !item['isChecked']" (click)="oneditclick($event,item)">edit</mat-icon> 
-                   
-                  <mat-icon *ngIf="item['isEditable']" (click)="oneditclick($event,item)">check_circle</mat-icon>
-                </button>
-                <button class="deletebtn" (click)="removeTodo($event,item['id'])" mat-fab aria-label="Example icon button with a delete icon">
-                    <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-    
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (item of filteredOptions$ | async; track item) {
+      <mat-option style="position: relative; padding: 0;" (click)="stopEvent($event,item)">
+        <div matAutocompleteTrigger class="optionDiv" (click)="onexactcheckclick($event,item)"
+          style="position: absolute;top:0; left: 0; height: 100%; padding-inline: 15px;">
+          <input class="example-ripple-checkbox" type="checkbox" style="transform: scale(1.5);"
+            [checked]="item['isChecked']" (click)="onexactcheckclick($event,item)">
+
+          <input id="inputBox{{item['id']}}" matInput [class.inputBox]="item['isEditable']"
+            [readonly]="!item['isEditable']" type="text"
+            style=" margin-left:2%; width: 80%; overflow: hidden; text-overflow: ellipsis; cursor:pointer ; "
+            [title]="item['text']" [ngStyle]="{textDecoration : item['isChecked'] ? 'line-through' : null}"
+            (click)="onexactcheckclick($event,item)" [(ngModel)]="item['text']" />
+
+          <button mat-fab class="editbtns" [ngStyle]="{'visibility': item['isChecked'] ? 'hidden' : 'visible', 
+                  '--mdc-fab-container-color' : item['isEditable'] ? 'seagreen' : 'indianred' }"
+            [disabled]="item['isChecked']" [disabledInteractive]="item['isChecked']"
+            (click)=" item['isEditable'] ? updateTodo($event,item) :  (!item['isEditable'] && !item['isChecked']) ? oneditclick($event,item) : null">
+            <mat-icon *ngIf="!item['isEditable'] && !item['isChecked']"
+              (click)="oneditclick($event,item)">edit</mat-icon>
+
+            <mat-icon *ngIf="item['isEditable']" style="--mdc-fab-container-color: seagreen;"
+              (click)="oneditclick($event,item)">check_circle</mat-icon>
+          </button>
+
+          <button class="deletebtn" (click)="removeTodo($event,item['id'])" mat-fab
+            aria-label="Example icon button with a delete icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
 </div>

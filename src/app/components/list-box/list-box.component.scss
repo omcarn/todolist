@@ -1,43 +1,61 @@
-
-.example-full-width{
+.example-full-width {
     width: 100%;
 }
 
-.deletebtn , .editbtns{
+.deletebtn,
+.editbtns {
     transform: scale(.65);
     float: right;
 }
 
-::ng-deep .mdc-list-item__primary-text{
+::ng-deep .mdc-list-item__primary-text {
     margin-right: 0;
     width: 100%;
 }
 
-::ng-deep .mat-icon{
+::ng-deep .mat-icon {
     margin-right: 0 !important;
 }
 
-@media screen and (min-width: 769px){
-.optionDiv{
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
-}
+@media screen and (min-width: 769px) {
+    .optionDiv {
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+    }
 }
 
-@media screen and (max-width: 769px){
-    .optionDiv{
+@media screen and (max-width: 769px) {
+    .optionDiv {
         display: inline-flex;
         align-items: center;
         width: 95%;
     }
 }
 
-.hideBtn{
+.hideBtn {
     display: none;
 }
 
- .showBtn{
+.showBtn {
     display: inline-block;
 
+}
+
+.mat-mdc-fab.mat-accent {
+    --mdc-fab-container-color: indianred;
+}
+
+.inputBox {
+    animation: inputBoxAnimation 5s;
+}
+
+@keyframes inputBoxAnimation {
+    0% {
+        background-color: lightgrey;
+    }
+
+    100% {
+        background-color: white;
+    }
 }
